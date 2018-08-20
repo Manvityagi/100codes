@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+ int lis(int arr[], int n) {
+   int *storage = new int[n];
+ 
+   
+   storage[0] = 1; 
+   storage[1] = arr[0] < arr[1] ? 2 : 1 ;
+   int temp , max = INT_MIN;
+   
+for(int i = 2; i < n; i++)
+{    max = 1;
+   for(int j = 0; j<i; j++)
+   { 
+     if(arr[i] > arr[j])
+       { temp = storage[j] + 1;
+         if(temp > max)
+           max = temp; 
+       } 
+   } 
+   
+     storage[i] = max;
+ 
+}
+  sort(storage,storage+n);
+   return storage[n-1];
+     
+ }
+
