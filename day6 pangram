@@ -1,0 +1,27 @@
+void ans (int n, string str)
+{ 
+   int arr[91] = {};
+     if(n < 26)
+     { cout<<"NO";
+       return ;
+     }
+  
+  for(int i = 0; i <str.size(); i++)
+  {
+    if(str[i] >= 'a' && str[i] <= 'z')
+      arr[str[i] - 32]++;
+    else
+      arr[str[i]]++;
+  }
+  
+  for(int i = 65; i<= 90; i++)
+  {
+    if(arr[i] == 0)
+    {
+      cout<<"NO";
+      return;
+    }
+  }
+  cout<<"YES";
+   
+}
