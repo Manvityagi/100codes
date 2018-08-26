@@ -1,0 +1,38 @@
+Node<int> *reverse(Node<int> *head) 
+{ Node<int> * prev = NULL; 
+Node<int> * current = head; 
+Node<int> * next; 
+while (current != NULL)
+{ next = current->next;
+current->next = prev;
+prev = current;
+current = next;
+} 
+return prev; 
+}
+Node<int>* helper(Node<int> *head)
+{ Node<int>* res = head; 
+Node <int>*temp, *prev = NULL;
+int carry = 1, sum;
+while (head != NULL)
+{ sum = carry + (head? head->data: 0);
+carry = (sum >= 10)? 1 : 0; 
+sum = sum % 10
+; head->data = sum; 
+temp = head;
+head = head->next;
+} if (carry > 0) 
+{ Node<int>* x = new Node<int> (carry);
+temp->next= x;
+} 
+return res;
+}
+Node<int>* addOne(Node<int> *head)
+{ if(head == NULL) 
+{ Node<int> *ans = new Node<int>(1); 
+return ans; 
+} 
+head = reverse(head);
+head = helper(head);
+return reverse(head);
+}
