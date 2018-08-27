@@ -1,0 +1,48 @@
+/*************
+ Following is the Node structure already written.
+
+ template <typename T>
+ class Node {
+	public:
+	T data;
+	Node* next;
+ 
+	Node(T data) {
+ next = NULL;
+ this->data = data;
+	}
+ 
+	~Node() {
+ if (next != NULL) {
+ delete next;
+ }
+	}
+ };
+ 
+*************/
+Node<int>* rev_linkedlist_itr(Node<int>* head)
+{
+    Node<int> *prev = NULL, *current = NULL, *next = NULL; 
+    current = head;
+    while(current != NULL){
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }  
+    head = prev;  
+     return head;
+}
+
+Node<int>* rearrange(Node<int> *head){
+  if(head==NULL || head->next == NULL)
+       return head;
+  
+  Node<int> *temp = head;
+  while(temp->next != NULL){
+  Node<int> *rev_head = rev_linkedlist_itr(temp->next);
+  temp->next = rev_head;
+    temp = temp->next;
+  }
+  return head;
+}
