@@ -1,0 +1,66 @@
+//head is the head of the linked list, n is number of elements to be reversed
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+
+class Pair{
+	public:
+	node* head;
+	node* tail;
+};
+
+Pair reverseR2(node* head){
+	if(head == NULL || head->next == NULL){
+		Pair ans;
+		ans.head = head;
+		ans.tail = head;
+		return ans;
+	}	
+
+	Pair smallAns = reverseR2(head->next);
+	smallAns.tail->next = head;
+	head->next = NULL;
+	Pair ans;
+	ans.head = smallAns.head;
+	ans.tail = head;
+	return ans;
+}
+
+ node* kReverse(node*head,int n)
+{   
+   if(head == NULL || head->next == NULL)
+            return head;
+   
+   int count1 = 1;
+   node* rec_head = head;
+   while(count1<=n && rec_head != NULL){
+      rec_head = rec_head->next;
+      count1++;
+    }  
+   
+   node* HEAD2 = kReverse(rec_head,n);
+  
+   int count2 = 1;
+   node *TAIL=head;
+   while(count2<n && TAIL != NULL){
+      TAIL = TAIL->next;
+      count2++;
+    } 
+   if(TAIL != NULL)
+  TAIL->next = NULL;
+ 
+  Pair ans = reverseR2(head);
+  
+  ans.tail->next = HEAD2;
+      
+   return ans.head; 
+}
