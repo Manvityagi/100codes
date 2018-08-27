@@ -1,0 +1,61 @@
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+//head is head of your linked list, i and j are indexes to be swapped
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+
+
+node* arrange_LinkedList(node* head)
+{     node *second_even=NULL,*last_odd=NULL,*temp;
+     
+  if(head == NULL || head->next == NULL)
+    return head;
+  
+  node* x = arrange_LinkedList(head->next);
+  if(head->data % 2 == 0 && x->data %2 != 0){
+    temp = x;
+    while(temp!=NULL){
+      if(temp->data % 2 != 0)
+        last_odd = temp;
+       else
+         second_even = temp;
+      
+      if(second_even != NULL)
+        break;
+      
+      temp = temp->next;
+    }
+    if(second_even == NULL){
+      last_odd->next = head;
+      head = x;
+    }else{
+      last_odd->next = head;
+      head->next = second_even;
+      head = x;    
+    }
+        
+    }else{     
+    head->next = x;} 
+ 
+    return head;
+}
