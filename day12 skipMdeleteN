@@ -1,0 +1,36 @@
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+
+node* skipMdeleteN(node  *head, int M, int N) {
+   node* temp = head,*tail;
+   int count = 0,del = 0;
+   while(temp != NULL ){
+     count++;
+     if(count == M){
+       count = 0;
+       tail = temp;
+       while(del<N && temp->next != NULL && temp != NULL){
+         temp=temp->next;
+         del++;
+       }
+       del = 0;
+       temp = temp->next;
+       tail->next = temp;    
+     }else{
+     temp = temp->next;}    
+   }
+       
+  return head;
+  
+
+}
