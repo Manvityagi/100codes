@@ -1,0 +1,162 @@
+1. RETURN KEYPAD
+#include <string>
+using namespace std;
+
+int keypad(int num, string output[]){
+    /* Insert all the possible combinations of the integer number into the output string array. You do not need to
+    print anything, just return the number of strings inserted into the array.
+    */
+  int i,j,k;
+  string smallout[1000];
+  string map[] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+
+       if(num==0){
+         output[0] = {};
+         return 1;
+       }
+  
+     int rem = num % 10;
+     string options = map[rem];
+     k = 0 ;
+     int smallcount = keypad(num/10,smallout);
+     for(i=0;i<smallcount;i++)
+     {
+       for(j=0;j<options.size();j++)
+         output[k++] = smallout[i] + options[j];
+     }
+        return k; 
+}
+
+2. PRINT KEYPAD
+void helper(int num,string foutput){
+  string map[] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+  string newout;
+  if(num == 0){
+    cout<<foutput<<endl;
+    return;
+  }
+  
+  int rem = num % 10;
+  string options = map[rem];
+  
+  for(int k = 0;k<options.size();k++)
+  {
+    newout = foutput;
+    newout = options.substr(k,1) + newout;
+    helper(num/10,newout);
+    
+  }
+  
+  
+  
+}
+void printKeypad(int number){
+  string foutput = "";
+  helper(number,foutput);
+}
+
+
+
+
+
+3. RETURN SUBSET OF ARRAY
+#include<cmath>
+/***
+You need to save all the subsets in the given 2D output array. And return the number of subsets(i.e. number of rows filled in output) from the given function.
+
+In ith row of output array, 1st column contains length of the ith subset. And from 1st column actual subset follows.
+For eg. Input : {1, 2}, then output should contain 
+	{{0}, 		// Length of this subset is 0
+	{1, 2},		// Length of this subset is 1
+	{1, 1},		// Length of this subset is also 1
+	{2, 1, 2}}	// Length of this subset is 2
+
+Don’t print the subsets, just save them in output.
+***/
+
+int subset(int input[], int n, int output[][20]) {
+
+  int i,j,smalloutput[100000][20],smallsize;
+  
+  if( n == 0)
+  {     output[0][0] = 0;
+        return 1;      
+  }
+  
+   smallsize = subset(input+1,n-1,output);
+    
+/*  for(i = 0;i<smallsize;i++){
+    for(j = 0;j<=smalloutput[i][0];j++)
+      output[i][j] = smalloutput[i][j];
+  }  */
+  
+  for(i = smallsize; i < 2*smallsize; i++)
+  {    
+    output[i][0] = output[i-smallsize][0] + 1;
+    output[i][1] = input[0];
+    
+    for(j = 2; j <= output[i][0]; j++)
+      output[i][j] = output[i-smallsize][j-1];
+  }
+   return 2 * smallsize;
+       
+}
+  
+    
+                                                                   
+ 
+      
+   
+ 
+
+4. PRINT SUBSET OF ARRAY
+#include<cmath>
+/***
+You need to save all the subsets in the given 2D output array. And return the number of subsets(i.e. number of rows filled in output) from the given function.
+
+In ith row of output array, 1st column contains length of the ith subset. And from 1st column actual subset follows.
+For eg. Input : {1, 2}, then output should contain 
+	{{0}, 		// Length of this subset is 0
+	{1, 2},		// Length of this subset is 1
+	{1, 1},		// Length of this subset is also 1
+	{2, 1, 2}}	// Length of this subset is 2
+
+Don’t print the subsets, just save them in output.
+***/
+
+int subset(int input[], int n, int output[][20]) {
+
+  int i,j,smalloutput[100000][20],smallsize;
+  
+  if( n == 0)
+  {     output[0][0] = 0;
+        return 1;      
+  }
+  
+   smallsize = subset(input+1,n-1,output);
+    
+/*  for(i = 0;i<smallsize;i++){
+    for(j = 0;j<=smalloutput[i][0];j++)
+      output[i][j] = smalloutput[i][j];
+  }  */
+  
+  for(i = smallsize; i < 2*smallsize; i++)
+  {    
+    output[i][0] = output[i-smallsize][0] + 1;
+    output[i][1] = input[0];
+    
+    for(j = 2; j <= output[i][0]; j++)
+      output[i][j] = output[i-smallsize][j-1];
+  }
+   return 2 * smallsize;
+       
+}
+  
+    
+                                                                   
+ 
+      
+   
+ 
+
+
